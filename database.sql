@@ -1,0 +1,39 @@
+CREATE TABLE genre (
+    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    name VARCHAR(255),
+    description TEXT
+)
+
+CREATE TABLE movie(
+    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    name VARCHAR(255),
+    year INT,
+    genre_id INT,
+    FOREIGN KEY (genre_id) REFERENCES genre (id)
+)
+
+CREATE TABLE customer(
+    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    name VARCHAR(255),
+    username VARCHAR(255),
+    password VARCHAR(255),
+    year_of_birth INT
+)
+
+CREATE TABLE review(
+    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    customer_id INT NOT NULL,
+    movie_id INT NOT NULL,
+    stars INT NOT NULL CHECK (stars BETWEEN 1 AND 5)
+)
+
+CREATE TABLE favorite(
+    id INT PRIMARY KEY GENERATED ALWAYS AS IDENTITY,
+    customer_id INT NOT NULL REFERENCES "customer"(id) ON DELETE CASCADE,
+    movie_id INT NOT NULL REFERENCES Movie(id) ON DELETE CASCADE
+)
+
+
+
+
+
